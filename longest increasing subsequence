@@ -1,0 +1,16 @@
+from typing import List
+import bisect
+
+class Solution:
+    def lengthOfLIS(self, nums: List[int]) -> int:
+        sub = []
+
+        for num in nums:
+            # Find the index where 'num' should be placed to maintain increasing order
+            i = bisect.bisect_left(sub, num)
+            if i == len(sub):
+                sub.append(num)
+            else:
+                sub[i] = num  # Replace to maintain minimal tail
+
+        return len(sub)
